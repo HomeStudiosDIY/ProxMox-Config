@@ -2,6 +2,8 @@
 
 Here is some settings and how to's to get your proxmox server setting done!!  
 
+I will also have all my LXC config and the resons why I have done what I have done!!!
+
 
 # Connect to your NAS with NFS 
 
@@ -19,3 +21,22 @@ Mount shares: mount -a
 
 
 # NVIDIA Drivers Install
+
+
+
+
+
+# Opensence
+
+# UniFi
+
+# Vaultwarden
+
+# Home Assistant
+
+# Jellefin Setup and Config
+
+# Plex Setup and Config
+
+
+
