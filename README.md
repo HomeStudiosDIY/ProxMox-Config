@@ -15,3 +15,6 @@ nano /etc/fstab
 10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0
 
 
+
+Reload systemd: systemctl daemon-reload
+Mount shares: mount -a
