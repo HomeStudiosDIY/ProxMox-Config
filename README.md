@@ -1,5 +1,6 @@
 # ProxMox-Config
 
+Here is some settings and how to's to get your proxmox server setting done!!  
 
 
 # Connect to your NAS with NFS 
@@ -15,3 +16,6 @@ nano /etc/fstab
 
 Reload systemd: systemctl daemon-reload  
 Mount shares: mount -a  
+
+
+# NVIDIA Drivers Install
