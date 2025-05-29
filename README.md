@@ -4,6 +4,8 @@ Here is some settings and how to's to get your proxmox server setting done!!
 
 I will also have all my LXC config and the resons why I have done what I have done!!!
 
+![image](https://github.com/user-attachments/assets/a60fffb1-2eb3-4f06-be77-1b8c25a4af98)
+
 
 # Connect to your NAS with NFS 
 
