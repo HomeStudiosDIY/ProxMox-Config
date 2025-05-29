@@ -4,46 +4,6 @@ Here is some settings and how to's to get your proxmox server setting done!!
 
 I will also have all my LXC config and the resons why I have done what I have done!!!
 
-![image](https://github.com/user-attachments/assets/a60fffb1-2eb3-4f06-be77-1b8c25a4af98)
-
-
-# Connect to your NAS with NFS 
-
-nano /etc/fstab
-
-10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0  
-10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0  
-10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0  
-10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0  
-
-
-
-Reload systemd: systemctl daemon-reload  
-Mount shares: mount -a  
-
-
-# NVIDIA Drivers Install
-
-
-
-
-
-# Opensence
-
-# UniFi
-
-
-	
-
-
-
-# Vaultwarden
-
-# Home Assistant
-
-# Jellefin Setup and Config
-
-# Plex Setup and Config
 
 
 
@@ -53,8 +13,7 @@ Proxmox installer
 nomodeset
 
 
-
-
+# Connect to your NAS with NFS 
 
 
 
@@ -94,6 +53,11 @@ chown 100109:100117 /mnt/pve/disk4tb/frigate/
 
 
 
+
+# NVIDIA Drivers Install
+
+
+
 NVIDIA
 
 apt update && apt upgrade -y && apt install pve-headers build-essential software-properties-common make nvtop htop -y
@@ -108,6 +72,8 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 
 
 ./NVIDIA-Linux-x86_64-550.144.03.run --dkms
+
+
 
 
 ls -al /dev/nvidia*
@@ -160,46 +126,23 @@ lxc.mount.entry: /dev/nvidia-caps/nvidia-cap1 dev/nvidia-caps/nvidia-cap1 none b
 lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none bind,optional,create=file
 
 
-RamDisk:
-lxc.mount.entry: tmpfs dev/shm tmpfs size=4G,nosuid,nodev,noexec,create=dir 0 0
 
 
 
+# Opensence
+
+# UniFi
 
 
-FRIGATE:
- To update Frigate, create a new container and transfer your configuration.
-
-
-mkdir /data/
-mkdir /data/config/
-mkdir /data/cctv/
-
-
-pct set 104 -mp0 /mnt/pve/disk4tb/frigate,mp=/data/cctv/
+	
 
 
 
+# Vaultwarden
 
-nano /etc/pve/lxc/104.conf
+# Home Assistant
 
-lxc.mount.entry: /dev/bus/usb/002/ dev/bus/usb/002/ none bind,optional,create=dir 0,0
-
-
-
-
-
-
-
-IMMICH:
-immich
-
-mkdir /data
-mkdir /data/immich
-mkdir /data/photos
-
-pct set 106 -mp0 /mnt/data/photos,mp=/data/photos/
-
+# Jellefin Setup and Config
 
 
 
@@ -214,9 +157,10 @@ mkdir /data/usb
 pct set 106 -mp0 /mnt/data/stream/,mp=/data/stream
 pct set 106 -mp1 /mnt/data/usb/,mp=/data/usb
 
+RamDisk:
+lxc.mount.entry: tmpfs dev/shm tmpfs size=4G,nosuid,nodev,noexec,create=dir 0 0
 
-
-
+# Plex Setup and Config
 
 PLEX:
 
@@ -248,7 +192,52 @@ curl -X POST -s -H "X-Plex-Client-Identifier: {XXXXXXXXX}" "https://plex.tv/api/
 
 
 
-RADARR:
+
+
+## FRIGATE:
+ To update Frigate, create a new container and transfer your configuration.
+
+
+mkdir /data/
+mkdir /data/config/
+mkdir /data/cctv/
+
+
+pct set 104 -mp0 /mnt/pve/disk4tb/frigate,mp=/data/cctv/
+
+
+
+
+nano /etc/pve/lxc/104.conf
+
+lxc.mount.entry: /dev/bus/usb/002/ dev/bus/usb/002/ none bind,optional,create=dir 0,0
+
+
+
+
+
+
+
+## IMMICH:
+immich
+
+mkdir /data
+mkdir /data/immich
+mkdir /data/photos
+
+pct set 106 -mp0 /mnt/data/photos,mp=/data/photos/
+
+
+
+
+
+
+
+
+
+
+
+## Radar:
 
 
 apt install resolvconf
@@ -262,8 +251,7 @@ mkdir /data/
 mkdir /data/radarr
 mkdir /data/sonarr
 
-mkdir /data/radarr
-mkdir /data/radarr
+
 
 
 nano /etc/pve/lxc/110.conf
@@ -284,5 +272,51 @@ pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
 
 
 
+##  Sonarr:
 
 
+mkdir /data
+mkdir /data/stream
+mkdir /data/usb
+mkdir /data/downloads
+mkdir /data/
+mkdir /data/radarr
+mkdir /data/sonarr
+
+
+
+
+nano /etc/pve/lxc/110.conf
+
+pct set 109 -mp0 /mnt/data/stream/,mp=/data/stream
+pct set 109 -mp1 /mnt/data/usb/,mp=/data/usb
+pct set 109 -mp1 /mnt/dve/disk4tb/movies,mp=/data/usb
+pct set 109 -mp2 /mnt/pve/disk4tb/downloads,mp=/data/downloads
+
+
+pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
+
+
+## Downloader
+
+
+mkdir /data
+mkdir /data/stream
+mkdir /data/usb
+mkdir /data/downloads
+mkdir /data/
+mkdir /data/radarr
+mkdir /data/sonarr
+
+
+
+
+nano /etc/pve/lxc/110.conf
+
+pct set 109 -mp0 /mnt/data/stream/,mp=/data/stream
+pct set 109 -mp1 /mnt/data/usb/,mp=/data/usb
+pct set 109 -mp1 /mnt/dve/disk4tb/movies,mp=/data/usb
+pct set 109 -mp2 /mnt/pve/disk4tb/downloads,mp=/data/downloads
+
+
+pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
