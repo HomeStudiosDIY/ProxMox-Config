@@ -1,10 +1,40 @@
-# ProxMox-Config
+
+# ProxMox-Config  <a id="readme-top"></a>
 
 Here with some config settings to help you get you ProxMox Server setup and working!!  
 
 I run all my application on a LXC inside Docker but you can run the LXC application directly this was just my preference for consistency as not all application I use can run directly on a LXC. All my LXC config and Docker Compose files will also be sheared.
 
 https://community-scripts.github.io/ProxmoxVE/
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">Connect to your NAS with NFS</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
 
 
 
@@ -56,7 +86,7 @@ Mount shares: mount -a
 chown 100109:100117 /mnt/pve/disk4tb/frigate/
 
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 # NVIDIA Drivers Install
