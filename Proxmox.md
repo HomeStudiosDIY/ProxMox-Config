@@ -1,9 +1,13 @@
 
+Overview
 
 
 
+Setup Requirements
 
 
+
+Setup Guides
 
 
 
@@ -169,19 +173,53 @@
 
 
 
+## Connect to your NAS with NFS
+
+
+### <u>Overview</u>
+
+
+To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
+
+### <u>Setup Requirements</U>
+
+If you need sub folders you will need to make the directory tree.
+	
+mkdir /mnt/data  
+mkdir /mnt/data/stream  
+mkdir /mnt/data/usb  
+mkdir /mnt/data/photos  
+
+
+mkdir /mnt/pve/disk4tb/frigate
+
+
+
+mkdir /mnt/pve/disk4tb/downloads
+
+
+### <u>Setup Guide</u>
+
+The following will be needed to auto connect to you NFS shears.
+ 
+nano /etc/fstab
+
+
+	10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0  
+	10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0  
+	10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0  
+	10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0  
+
+
+Once you have saved your config you need to run the following.
+
+Reload systemd: systemctl daemon-reload  
+Mount shares: mount -a
 
 
 
 
-Overview
-
-
-
-Setup Requirements
-
-
-
-Setup Guides
+chown 100109:100117 /mnt/pve/disk4tb/frigate/
 
 
 
@@ -191,29 +229,27 @@ Setup Guides
 ## Install NVIDIA Drivers on ProxMox
 <a id="adding_nvidia_drivers"></a>
 
+### <i>Overview</i>
+
+### <i>Setup Requirements</i>
+
+make sure the drives are the same on the host and LXC
+
+### <i>Setup Guide</i>
 
 
-
-
-
-
-### NVIDIA
+1. #### <p><u>NVIDIA:</u>
 <a id="install-nvidia-drivers-on-proxmox"></a>
 
 
 
-Overview
+<p> &nbsp; &nbsp; &nbsp; &nbsp; apt update && apt upgrade -y && apt install pve-headers build-essential software-properties-common make nvtop htop -y</p>
 
-Setup Requirements
-
-Setup Guide
-
-apt update && apt upgrade -y && apt install pve-headers build-essential software-properties-common make nvtop htop -y
-update-initramfs -u
+&nbsp; &nbsp; &nbsp; &nbsp; update-initramfs -u
 
 
 
-wget https://uk.download.nvidia.com/XFree86/Linux-x86_64/550.142/NVIDIA-Linux-x86_64-550.142.run
+>>wget https://uk.download.nvidia.com/XFree86/Linux-x86_64/550.142/NVIDIA-Linux-x86_64-550.142.run
 
 
 chmod +x NVIDIA-Linux-x86_64-550.144.03.run
@@ -221,13 +257,13 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 
 ./NVIDIA-Linux-x86_64-550.144.03.run --dkms
 
+</P>
 
 
 
 
 
-
-### LXC Setup for Nvida: 
+2. #### <u>LXC Setup for Nvida:</u>
 <a id="install-nvidia-drivers-on-proxmox"></a>
 
 
@@ -270,9 +306,10 @@ nvidia-ctk runtime configure --runtime=docker
 
 
 nano /etc/nvidia-container-runtime/config.toml  
-#no-cgroups = false  
-to  
-no-cgroups = true  
+
+	#no-cgroups = false  
+	to  
+	no-cgroups = true  
 
 
 

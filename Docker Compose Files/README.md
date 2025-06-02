@@ -1,164 +1,365 @@
-# Work in Progress
+# Editor.md
 
-# ProxMox-Config 
+![](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png)
 
-Here are some configuration settings to help you get your Proxmox Server set up and running!
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
-I run all my applications in LXC containers using Docker. You can run the applications directly in LXC containers if you prefer, but I use Docker for consistency, since not all applications I use run well directly in LXC. All my LXC configurations and Docker Compose files are also shared here.
+**目录 (Table of Contents)**
 
-[https://community-scripts.github.io/ProxmoxVE/](https://community-scripts.github.io/ProxmoxVE/)
+[TOCM]
 
----
+[TOC]
 
-## Overview
+# Heading 1
+## Heading 2               
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+# Heading 1 link [Heading link](https://github.com/pandao/editor.md "Heading link")
+## Heading 2 link [Heading link](https://github.com/pandao/editor.md "Heading link")
+### Heading 3 link [Heading link](https://github.com/pandao/editor.md "Heading link")
+#### Heading 4 link [Heading link](https://github.com/pandao/editor.md "Heading link") Heading link [Heading link](https://github.com/pandao/editor.md "Heading link")
+##### Heading 5 link [Heading link](https://github.com/pandao/editor.md "Heading link")
+###### Heading 6 link [Heading link](https://github.com/pandao/editor.md "Heading link")
 
-- Setup Requirements
-- Setup Guide
+#### 标题（用底线的形式）Heading (underline)
 
----
+This is an H1
+=============
 
-## Proxmox Installer
+This is an H2
+-------------
 
-Use `nomodeset` during install if needed.
+### 字符效果和横线等
+                
+----
 
----
+~~删除线~~ <s>删除线（开启识别HTML标签时）</s>
+*斜体字*      _斜体字_
+**粗体**  __粗体__
+***粗斜体*** ___粗斜体___
 
-## Connect to your NAS with NFS 
+上标：X<sub>2</sub>，下标：O<sup>2</sup>
 
-### Overview
+**缩写(同HTML的abbr标签)**
 
-To connect to a NAS device with NFS, you'll need to set up some directories. Here's how I've done mine:
+> 即更长的单词或短语的缩写形式，前提是开启识别HTML标签时，已默认开启
 
-### Setup Requirements
+The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.
 
-```bash
-mkdir /mnt/data
-mkdir /mnt/data/stream
-mkdir /mnt/data/usb
-mkdir /mnt/data/photos
-mkdir -p /mnt/pve/disk4tb/frigate
-mkdir -p /mnt/pve/disk4tb/downloads
+### 引用 Blockquotes
+
+> 引用文本 Blockquotes
+
+引用的行内混合 Blockquotes
+                    
+> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接](http://localhost/)。
+
+### 锚点与链接 Links
+
+[普通链接](http://localhost/)
+
+[普通链接带标题](http://localhost/ "普通链接带标题")
+
+直接链接：<https://github.com>
+
+[锚点链接][anchor-id] 
+
+[anchor-id]: http://www.this-anchor-link.com/
+
+[mailto:test.test@gmail.com](mailto:test.test@gmail.com)
+
+GFM a-tail link @pandao  邮箱地址自动链接 test.test@gmail.com  www@vip.qq.com
+
+> @pandao
+
+### 多语言代码高亮 Codes
+
+#### 行内代码 Inline code
+
+执行命令：`npm install marked`
+
+#### 缩进风格
+
+即缩进四个空格，也做为实现类似 `<pre>` 预格式化文本 ( Preformatted Text ) 的功能。
+
+    <?php
+        echo "Hello world!";
+    ?>
+    
+预格式化文本：
+
+    | First Header  | Second Header |
+    | ------------- | ------------- |
+    | Content Cell  | Content Cell  |
+    | Content Cell  | Content Cell  |
+
+#### JS代码　
+
+```javascript
+function test() {
+	console.log("Hello world!");
+}
+ 
+(function(){
+    var box = function() {
+        return box.fn.init();
+    };
+
+    box.prototype = box.fn = {
+        init : function(){
+            console.log('box.init()');
+
+			return this;
+        },
+
+		add : function(str) {
+			alert("add", str);
+
+			return this;
+		},
+
+		remove : function(str) {
+			alert("remove", str);
+
+			return this;
+		}
+    };
+    
+    box.fn.init.prototype = box.fn;
+    
+    window.box =box;
+})();
+
+var testBox = box();
+testBox.add("jQuery").remove("jQuery");
 ```
 
-### Setup Guide
+#### HTML 代码 HTML codes
 
-Edit `/etc/fstab` to auto-connect your NFS shares:
-
-```bash
-nano /etc/fstab
-
-10.0.0.1:/volume1/Stream/       /mnt/data/stream   nfs defaults 0 0
-10.0.0.1:/volumeUSB1/usbshare  /mnt/data/usb      nfs defaults 0 0
-10.0.0.1:/volume1/Photos-Link  /mnt/data/photos   nfs defaults 0 0
-10.0.0.1:/volume1/Downloads    /mnt/data/downloads nfs defaults 0 0
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <mate charest="utf-8" />
+        <meta name="keywords" content="Editor.md, Markdown, Editor" />
+        <title>Hello world!</title>
+        <style type="text/css">
+            body{font-size:14px;color:#444;font-family: "Microsoft Yahei", Tahoma, "Hiragino Sans GB", Arial;background:#fff;}
+            ul{list-style: none;}
+            img{border:none;vertical-align: middle;}
+        </style>
+    </head>
+    <body>
+        <h1 class="text-xxl">Hello world!</h1>
+        <p class="text-green">Plain text</p>
+    </body>
+</html>
 ```
 
-Reload systemd and mount shares:
+### 图片 Images
 
-```bash
-systemctl daemon-reload
-mount -a
+Image:
+
+![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+
+> Follow your heart.
+
+![](https://pandao.github.io/editor.md/examples/images/8.jpg)
+
+> 图为：厦门白城沙滩
+
+图片加链接 (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+> 图为：李健首张专辑《似水流年》封面
+                
+----
+
+### 列表 Lists
+
+#### 无序列表（减号）Unordered Lists (-)
+                
+- 列表一
+- 列表二
+- 列表三
+     
+#### 无序列表（星号）Unordered Lists (*)
+
+* 列表一
+* 列表二
+* 列表三
+
+#### 无序列表（加号和嵌套）Unordered Lists (+)
+                
++ 列表一
++ 列表二
+    + 列表二-1
+    + 列表二-2
+    + 列表二-3
++ 列表三
+    * 列表一
+    * 列表二
+    * 列表三
+
+#### 有序列表 Ordered Lists (-)
+                
+1. 第一行
+2. 第二行
+3. 第三行
+
+#### GFM task list
+
+- [x] GFM task list 1
+- [x] GFM task list 2
+- [ ] GFM task list 3
+    - [ ] GFM task list 3-1
+    - [ ] GFM task list 3-2
+    - [ ] GFM task list 3-3
+- [ ] GFM task list 4
+    - [ ] GFM task list 4-1
+    - [ ] GFM task list 4-2
+                
+----
+                    
+### 绘制表格 Tables
+
+| 项目        | 价格   |  数量  |
+| --------   | -----:  | :----:  |
+| 计算机      | $1600   |   5     |
+| 手机        |   $12   |   12   |
+| 管线        |    $1    |  234  |
+                    
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell 
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| Function name | Description                    |
+| ------------- | ------------------------------ |
+| `help()`      | Display the help window.       |
+| `destroy()`   | **Destroy your computer!**     |
+
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | $1600 |
+| col 2 is      | centered        |   $12 |
+| zebra stripes | are neat        |    $1 |
+
+| Item      | Value |
+| --------- | -----:|
+| Computer  | $1600 |
+| Phone     |   $12 |
+| Pipe      |    $1 |
+                
+----
+
+#### 特殊符号 HTML Entities Codes
+
+&copy; &  &uml; &trade; &iexcl; &pound;
+&amp; &lt; &gt; &yen; &euro; &reg; &plusmn; &para; &sect; &brvbar; &macr; &laquo; &middot; 
+
+X&sup2; Y&sup3; &frac34; &frac14;  &times;  &divide;   &raquo;
+
+18&ordm;C  &quot;  &apos;
+
+[========]
+
+### Emoji表情 :smiley:
+
+> Blockquotes :star:
+
+#### GFM task lists & Emoji & fontAwesome icon emoji & editormd logo emoji :editormd-logo-5x:
+
+- [x] :smiley: @mentions, :smiley: #refs, [links](), **formatting**, and <del>tags</del> supported :editormd-logo:;
+- [x] list syntax required (any unordered or ordered list supported) :editormd-logo-3x:;
+- [x] [ ] :smiley: this is a complete item :smiley:;
+- [ ] []this is an incomplete item [test link](#) :fa-star: @pandao; 
+- [ ] [ ]this is an incomplete item :fa-star: :fa-gear:;
+    - [ ] :smiley: this is an incomplete item [test link](#) :fa-star: :fa-gear:;
+    - [ ] :smiley: this is  :fa-star: :fa-gear: an incomplete item [test link](#);
+ 
+#### 反斜杠 Escape
+
+\*literal asterisks\*
+
+[========]
+            
+### 科学公式 TeX(KaTeX)
+
+$$E=mc^2$$
+
+行内的公式$$E=mc^2$$行内的公式，行内的$$E=mc^2$$公式。
+
+$$x > y$$
+
+$$\(\sqrt{3x-1}+(1+x)^2\)$$
+                    
+$$\sin(\alpha)^{\theta}=\sum_{i=0}^{n}(x^i + \cos(f))$$
+
+多行公式：
+
+```math
+\displaystyle
+\left( \sum\_{k=1}^n a\_k b\_k \right)^2
+\leq
+\left( \sum\_{k=1}^n a\_k^2 \right)
+\left( \sum\_{k=1}^n b\_k^2 \right)
 ```
 
-Fix ownership for Frigate:
-
-```bash
-chown 100109:100117 /mnt/pve/disk4tb/frigate/
+```katex
+\displaystyle 
+    \frac{1}{
+        \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{
+        \frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {
+        1+\frac{e^{-6\pi}}
+        {1+\frac{e^{-8\pi}}
+         {1+\cdots} }
+        } 
+    }
 ```
 
----
-
-## Install NVIDIA Drivers on Proxmox 
-
-### On Proxmox Host
-
-#### Setup
-
-```bash
-apt update && apt upgrade -y
-apt install pve-headers build-essential software-properties-common make nvtop htop -y
-update-initramfs -u
-
-wget https://uk.download.nvidia.com/XFree86/Linux-x86_64/550.142/NVIDIA-Linux-x86_64-550.142.run
-chmod +x NVIDIA-Linux-x86_64-550.144.03.run
-./NVIDIA-Linux-x86_64-550.144.03.run --dkms
+```latex
+f(x) = \int_{-\infty}^\infty
+    \hat f(\xi)\,e^{2 \pi i \xi x}
+    \,d\xi
 ```
 
-### LXC Setup for NVIDIA
+### 分页符 Page break
 
-#### Setup
+> Print Test: Ctrl + P
 
-```bash
-pct push 105 NVIDIA-Linux-x86_64-550.144.03.run /root/
-chmod +x /root/NVIDIA-Linux-x86_64-550.144.03.run
-./NVIDIA-Linux-x86_64-550.144.03.run --no-kernel-modules
+[========]
 
-apt install gpg curl
+### 绘制流程图 Flowchart
 
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey |   gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+```flow
+st=>start: 用户登陆
+op=>operation: 登陆操作
+cond=>condition: 登陆成功 Yes or No?
+e=>end: 进入后台
 
-curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list |
-  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |
-  tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-apt update
-apt install nvidia-container-toolkit
-nvidia-smi
-
-# If running Docker:
-nvidia-ctk runtime configure --runtime=docker
+st->op->cond
+cond(yes)->e
+cond(no)->op
 ```
 
-Edit runtime config:
-
-```bash
-nano /etc/nvidia-container-runtime/config.toml
-# Change:
-no-cgroups = false
-# To:
-no-cgroups = true
+[========]
+                    
+### 绘制序列图 Sequence Diagram
+                    
+```seq
+Andrew->China: Says Hello 
+Note right of China: China thinks\nabout it 
+China-->Andrew: How are you? 
+Andrew->>China: I am good thanks!
 ```
 
-Verify devices:
-
-```bash
-ls -al /dev/nvidia*
-```
-
-Edit LXC config `/etc/pve/lxc/105.conf`:
-
-```ini
-lxc.cgroup2.devices.allow: c 195:* rwm
-lxc.cgroup2.devices.allow: c 234:* rwm
-lxc.cgroup2.devices.allow: c 237:* rwm
-lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
-lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
-lxc.mount.entry: /dev/nvidia-modeset dev/nvidia-modeset none bind,optional,create=file
-lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
-lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file
-lxc.mount.entry: /dev/nvidia-caps/nvidia-cap1 dev/nvidia-caps/nvidia-cap1 none bind,optional,create=file
-lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none bind,optional,create=file
-```
-
----
-
-## OpnSense 
-
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/opnsense-vm.sh)"
-```
-
-## UniFi 
-
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
-```
-
-Links:
-
-- [init-mongo.sh](https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/init-mongo.sh)
-- [Unifi.yaml](https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/Unifi.yaml)
-
----
-
-*(Truncated for readability — let me know when you’re ready to continue from Vaultwarden onward.)*
+### End
