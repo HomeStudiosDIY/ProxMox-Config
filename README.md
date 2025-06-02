@@ -1,3 +1,5 @@
+# Work in Progress
+
 
 # ProxMox-Config  <a id="readme-top"></a>
 
@@ -14,24 +16,47 @@ https://community-scripts.github.io/ProxmoxVE/
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">Connect to your NAS with NFS</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
+		<a href="#nas-to-nfs">Connect to your NAS with NFS</a>
+		  <ul>
+			<li><a href="#built-with">Built With</a></li>
+		  </ul>
     </li>
     <li>
-      <a href="#install-nvidia-drivers-on-proxmox">Install NVIDIA Drivers on ProxMox</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
+		<a href="#install-nvidia-drivers-on-proxmox">Install NVIDIA Drivers</a>
+		  <ul>
+			<li><a href="#prerequisites">On Proxmox</a></li>
+			<li><a href="#installation">ON LXC's</a></li>
+		  </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#usage">OpnSense</a></li>
+	
+    <li><a href="#roadmap">UniFi</a></li>
+	
+    <li><a href="#contributing">Vaultwarden</a></li>
+	
+    <li><a href="#license">Home Assistant</a></li>
+	
+    <li><a href="#contact">JellyFin</a></li>
+	
+    <li><a href="#acknowledgments">Plex</a></li>
+	
+	<li><a href="#acknowledgments">Frigate</a></li>
+	
+	<li><a href="#acknowledgments">Immich</a></li>
+	<li>
+		<a href="#acknowledgments">Media</a>
+		  <ul>
+			<li><a href="#prerequisites">Ombi</a></li>
+			<li><a href="#installation">ON LXC's</a></li>
+		  </ul>	
+	</li>
+	<li>
+		<a href="#acknowledgments">Downloaders</a>
+		  <ul>
+			<li><a href="#prerequisites">ARR</a></li>
+			<li><a href="#installation">Radarr</a></li>
+		  </ul>	  
+	</li>
   </ol>
 </details>
 
@@ -45,8 +70,8 @@ nomodeset
 
 
 
-<a id="about-the-project"></a>
-# Connect to your NAS with NFS
+<a id="nas-to-nfs"></a>
+## Connect to your NAS with NFS
 
 To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
 
@@ -89,13 +114,13 @@ chown 100109:100117 /mnt/pve/disk4tb/frigate/
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
+## Install NVIDIA Drivers on ProxMox
 <a id="install-nvidia-drivers-on-proxmox"></a>
-# Install NVIDIA Drivers on ProxMox
 
 
+### NVIDIA
+<a id="install-nvidia-drivers-on-proxmox"></a>
 
-NVIDIA
 
 apt update && apt upgrade -y && apt install pve-headers build-essential software-properties-common make nvtop htop -y
 update-initramfs -u
@@ -114,7 +139,12 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 
 
 
-LXC Setup for Nvida 
+
+
+### LXC Setup for Nvida: 
+<a id="install-nvidia-drivers-on-proxmox"></a>
+
+
 
 I have the following LXC setup to use my NVIDA card (Jellyfin, Plex, ......)
 
@@ -172,33 +202,51 @@ lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none b
 
 
 
-# Opensence
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+
+
+
+## Opensence
+<a id="about-the-project"></a>
 
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/opnsense-vm.sh)"
 
 
 
-# UniFi
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## UniFi
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 	
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-# Vaultwarden
+## Vaultwarden
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
 
-# Home Assistant
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Home Assistant
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/haos-vm.sh)"
 
-# Jellefin Setup and Config
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Jellefin Setup and Config
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
@@ -217,8 +265,13 @@ pct set 106 -mp1 /mnt/data/usb/,mp=/data/usb
 RamDisk:
 lxc.mount.entry: tmpfs dev/shm tmpfs size=4G,nosuid,nodev,noexec,create=dir 0 0
 
-# Plex Setup and Config
 
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# Plex Setup and Config
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 PLEX:
@@ -252,8 +305,10 @@ curl -X POST -s -H "X-Plex-Client-Identifier: {XXXXXXXXX}" "https://plex.tv/api/
 
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## FRIGATE:
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
@@ -283,8 +338,10 @@ lxc.mount.entry: /dev/bus/usb/002/ dev/bus/usb/002/ none bind,optional,create=di
 
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## IMMICH:
+<a id="about-the-project"></a>
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
@@ -304,10 +361,10 @@ pct set 106 -mp0 /mnt/data/photos,mp=/data/photos/
 
 
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Radar:
-
+<a id="about-the-project"></a>
 
 
 
@@ -339,9 +396,10 @@ pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
       - /data/downloads:/downloads #optional
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ##  Sonarr:
-
+<a id="about-the-project"></a>
 
 mkdir /data
 mkdir /data/stream
@@ -362,9 +420,10 @@ pct set 109 -mp2 /mnt/pve/disk4tb/downloads,mp=/data/downloads
 
 pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Downloader
-
+<a id="about-the-project"></a>
 
 mkdir /data
 mkdir /data/stream
@@ -389,3 +448,5 @@ pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
 
 
 apt install resolvconf
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
