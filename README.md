@@ -1,9 +1,10 @@
 # ProxMox-Config
 
-Here is some settings and how to's to get your proxmox server setting done!!  
+Here with some config settings to help you get you ProxMox Server setup and working!!  
 
-I will also have all my LXC config and the resons why I have done what I have done!!!
+I run all my application on a LXC inside Docker but you can run the LXC application directly this was just my preference for consistency as not all application I use can run directly on a LXC. All my LXC config and Docker Compose files will also be sheared.
 
+https://community-scripts.github.io/ProxmoxVE/
 
 
 
@@ -13,16 +14,18 @@ Proxmox installer
 nomodeset
 
 
+
+
 # Connect to your NAS with NFS 
 
+To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
 
+If you need sub folders you will need to make the directory tree.
 
-
-
-mkdir /mnt/data
-mkdir /mnt/data/stream
-mkdir /mnt/data/usb
-mkdir /mnt/data/photos
+mkdir /mnt/data  
+mkdir /mnt/data/stream  
+mkdir /mnt/data/usb  
+mkdir /mnt/data/photos  
 
 
 mkdir /mnt/pve/disk4tb/frigate
@@ -33,17 +36,19 @@ mkdir /mnt/pve/disk4tb/downloads
 
 
 
-Connect to NFS 
+The following will be needed to auto connect to you NFS shears.
+ 
 nano /etc/fstab
 
-10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0
-10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0
-10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0
-10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0
+10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0  
+10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0  
+10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0  
+10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0  
 
 
+Once you have saved your config you need to run the following.
 
-Reload systemd: systemctl daemon-reload
+Reload systemd: systemctl daemon-reload  
 Mount shares: mount -a
 
 
@@ -76,14 +81,13 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 
 
 
-ls -al /dev/nvidia*
-
-
-
-
-
 
 LXC Setup for Nvida 
+
+I have the following LXC setup to use my NVIDA card (Jellyfin, Plex, ......)
+
+
+
 
 
 pct push 105 NVIDIA-Linux-x86_64-550.144.03.run /root/NVIDIA-Linux-x86_64-550.144.03.run
@@ -93,22 +97,29 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 ./NVIDIA-Linux-x86_64-550.144.03.run --no-kernel-modules
 
 apt install gpg curl
+
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
-apt update
-apt install nvidia-container-toolkit
 
-nvidia-smi
+apt update  
+apt install nvidia-container-toolkit  
+nvidia-smi  
 
+only if you run Docker  
 nvidia-ctk runtime configure --runtime=docker
 
 
 
 
-nano /etc/nvidia-container-runtime/config.toml
-#no-cgroups = false
-to
-no-cgroups = true
+nano /etc/nvidia-container-runtime/config.toml  
+#no-cgroups = false  
+to  
+no-cgroups = true  
+
+
+
+ls -al /dev/nvidia*
+
 
 nano /etc/pve/lxc/105.conf
 
@@ -131,19 +142,33 @@ lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none b
 
 # Opensence
 
+
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/opnsense-vm.sh)"
+
+
+
 # UniFi
 
-
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 	
 
 
 
 # Vaultwarden
 
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
+
+
 # Home Assistant
+
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/haos-vm.sh)"
 
 # Jellefin Setup and Config
 
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
 
 JELLYFIN:
@@ -162,6 +187,8 @@ lxc.mount.entry: tmpfs dev/shm tmpfs size=4G,nosuid,nodev,noexec,create=dir 0 0
 
 # Plex Setup and Config
 
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 PLEX:
 
 mkdir /data
@@ -195,6 +222,13 @@ curl -X POST -s -H "X-Plex-Client-Identifier: {XXXXXXXXX}" "https://plex.tv/api/
 
 
 ## FRIGATE:
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
+
+
+Privileged
+
+
  To update Frigate, create a new container and transfer your configuration.
 
 
@@ -219,6 +253,9 @@ lxc.mount.entry: /dev/bus/usb/002/ dev/bus/usb/002/ none bind,optional,create=di
 
 
 ## IMMICH:
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
+
 immich
 
 mkdir /data
@@ -240,14 +277,13 @@ pct set 106 -mp0 /mnt/data/photos,mp=/data/photos/
 ## Radar:
 
 
-apt install resolvconf
+
 
 
 mkdir /data
 mkdir /data/stream
 mkdir /data/usb
 mkdir /data/downloads
-mkdir /data/
 mkdir /data/radarr
 mkdir /data/sonarr
 
@@ -279,8 +315,6 @@ mkdir /data
 mkdir /data/stream
 mkdir /data/usb
 mkdir /data/downloads
-mkdir /data/
-mkdir /data/radarr
 mkdir /data/sonarr
 
 
@@ -320,3 +354,6 @@ pct set 109 -mp2 /mnt/pve/disk4tb/downloads,mp=/data/downloads
 
 
 pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
+
+
+apt install resolvconf
