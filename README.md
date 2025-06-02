@@ -11,47 +11,170 @@ https://community-scripts.github.io/ProxmoxVE/
 
 
 
-<!-- TABLE OF CONTENTS -->
+Overview
+
+Setup Requirements
+
+Setup Guide
+
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
 		<a href="#nas-to-nfs">Connect to your NAS with NFS</a>
-		  <ul>
-			<li><a href="#built-with">Built With</a></li>
-		  </ul>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>
     </li>
     <li>
 		<a href="#install-nvidia-drivers-on-proxmox">Install NVIDIA Drivers</a>
 		  <ul>
-			<li><a href="#prerequisites">On Proxmox</a></li>
-			<li><a href="#installation">ON LXC's</a></li>
+			<li>
+				<a href="#prerequisites">On Proxmox</a>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>	
+			</li>
+			<li>
+				<a href="#installation">ON LXC's</a>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>					
+			</li>
 		  </ul>
     </li>
-    <li><a href="#usage">OpnSense</a></li>
-    <li><a href="#roadmap">UniFi</a></li>
-    <li><a href="#contributing">Vaultwarden</a></li>
-    <li><a href="#license">Home Assistant</a></li>
-    <li><a href="#contact">JellyFin</a></li>
-    <li><a href="#acknowledgments">Plex</a></li>
-	<li><a href="#acknowledgments">Frigate</a></li>
-	<li><a href="#acknowledgments">Immich</a></li>
+    <li>
+		<a href="#nas-to-nfs">Connect to your NAS with NFS</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>
+    </li>
+    <li>
+		<a href="#install-nvidia-drivers-on-proxmox">Install NVIDIA Drivers</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>	
+    </li>		
+    <li>
+		<a href="#usage">OpnSense</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>
+	</li>
+    <li>
+		<a href="#roadmap">UniFi</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>		
+	</li>
+    <li>
+		<a href="#contributing">Vaultwarden</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
+    <li>
+		<a href="#license">Home Assistant</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
+    <li>
+		<a href="#contact">JellyFin</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
+    <li>
+		<a href="#acknowledgments">Plex</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
+	<li>
+		<a href="#acknowledgments">Frigate</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
+	<li>
+		<a href="#acknowledgments">Immich</a>
+			<ul>
+				<li><a href="#built-with">Overview</a></li>
+				<li><a href="#built-with">Setup Requirements</a></li>
+				<li><a href="#built-with">Setup Guide</a></li>
+			</ul>			
+	</li>
 	<li>
 		<a href="#acknowledgments">Media</a>
 		  <ul>
-			<li><a href="#prerequisites">Ombi</a></li>
-			<li><a href="#installation">ON LXC's</a></li>
+			<li>
+				<a href="#prerequisites">Ombi</a>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>
+			</li>
+			<li>
+				<a href="#installation">ON LXC's</a>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>					
+			</li>
 		  </ul>	
 	</li>
 	<li>
 		<a href="#acknowledgments">Downloaders</a>
 		  <ul>
-			<li><a href="#prerequisites">ARR</a></li>
-			<li><a href="#installation">Radarr</a></li>
+			<li>
+				<a href="#prerequisites">ARR</a></li>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>				  
+			<li>
+				<a href="#installation">Radarr</a>
+					<ul>
+						<li><a href="#built-with">Overview</a></li>
+						<li><a href="#built-with">Setup Requirements</a></li>
+						<li><a href="#built-with">Setup Guide</a></li>
+					</ul>				
+			</li>
 		  </ul>	  
 	</li>
   </ol>
 </details>
+
+
 
 
 
@@ -66,10 +189,16 @@ nomodeset
 <a id="nas-to-nfs"></a>
 ## Connect to your NAS with NFS
 
+
+### <u>Overview</u>
+
+
 To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
 
-If you need sub folders you will need to make the directory tree.
+### <u>Setup Requirements</U>
 
+If you need sub folders you will need to make the directory tree.
+	
 mkdir /mnt/data  
 mkdir /mnt/data/stream  
 mkdir /mnt/data/usb  
@@ -83,15 +212,16 @@ mkdir /mnt/pve/disk4tb/frigate
 mkdir /mnt/pve/disk4tb/downloads
 
 
+### <u>Setup Guide</u>
 
 The following will be needed to auto connect to you NFS shears.
  
 nano /etc/fstab
 
-10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0  
-10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0  
-10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0  
-10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0  
+	10.0.0.1:/volume1/Stream/ /mnt/data/stream nfs defaults 0 0  
+	10.0.0.1:/volumeUSB1/usbshare /mnt/data/usb nfs defaults 0 0  
+	10.0.0.1:/volume1/Photos-Link /mnt/data/photos nfs defaults 0 0  
+	10.0.0.1:/volume1/Downloads /mnt/data/downloads nfs defaults 0 0  
 
 
 Once you have saved your config you need to run the following.
@@ -101,10 +231,21 @@ Mount shares: mount -a
 
 
 
+
 chown 100109:100117 /mnt/pve/disk4tb/frigate/
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="left">(
+<a href="#readme-top">back to top </a> <p align="right">(<a href="#readme-top">Home Page</a>)</p>
+
+
+
+<p style="text-align:left;">
+		<a href="#readme-top">back to top</a>
+	<span style="float:right;">
+        <a href="#readme-top">Home Page</a>
+    </span>
+</p>
 
 
 ## Install NVIDIA Drivers on ProxMox
@@ -114,6 +255,13 @@ chown 100109:100117 /mnt/pve/disk4tb/frigate/
 ### NVIDIA
 <a id="install-nvidia-drivers-on-proxmox"></a>
 
+
+
+Overview
+
+Setup Requirements
+
+Setup Guide
 
 apt update && apt upgrade -y && apt install pve-headers build-essential software-properties-common make nvtop htop -y
 update-initramfs -u
@@ -136,6 +284,16 @@ chmod +x NVIDIA-Linux-x86_64-550.144.03.run
 
 ### LXC Setup for Nvida: 
 <a id="install-nvidia-drivers-on-proxmox"></a>
+
+
+Overview
+
+Setup Requirements
+
+Setup Guide
+
+
+
 
 
 
@@ -205,6 +363,13 @@ lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none b
 <a id="about-the-project"></a>
 
 
+Overview
+
+Setup Requirements
+
+Setup Guide
+
+
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/opnsense-vm.sh)"
 
 
@@ -219,10 +384,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/Proxmo
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 	
 
-<a href="https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/init-mongo.sh" target="_blank">file</a>
+<a href="https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/init-mongo.sh/" target="_blank">file</a>
 
 
-<a href="https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/Unifi.yaml" target="_blank" rel="noopener noreferrer">file Docker</a>
+<a href="https://github.com/HomeStudiosDIY/ProxMox-Config/blob/main/Docker%20Compose%20Files/Unifi/Unifi.yaml/" target="_blank" rel="noopener noreferrer">file Docker</a>
 
 
 
@@ -247,6 +412,21 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/Proxmo
 
 ## Jellefin Setup and Config
 <a id="about-the-project"></a>
+
+
+
+
+Overview
+
+Jellyfin is the volunteer-built media solution that puts you in control of your media. Stream to any device from your own server, with no strings attached. Your media, your server, your way.
+
+https://jellyfin.org/
+
+Setup Requirements
+
+Setup Guide
+
+
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
@@ -310,6 +490,10 @@ curl -X POST -s -H "X-Plex-Client-Identifier: {XXXXXXXXX}" "https://plex.tv/api/
 ## FRIGATE:
 <a id="about-the-project"></a>
 
+
+Frigate is a free, open-source NVR (Network Video Recorder) system designed specifically for real-time AI-powered object detection. It’s commonly used in home automation setups, especially when privacy, performance, and local processing are a priority.
+
+
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
 
@@ -343,6 +527,12 @@ lxc.mount.entry: /dev/bus/usb/002/ dev/bus/usb/002/ none bind,optional,create=di
 ## IMMICH:
 <a id="about-the-project"></a>
 
+
+Immich is a free, open-source, self-hosted photo and video management platform designed as a privacy-focused alternative to cloud services like Google Photos and iCloud. It allows you to back up, organize, and browse your media entirely on your own server, giving you full control over your data.
+
+
+
+
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/docker.sh)"
 
 immich
@@ -365,6 +555,14 @@ pct set 106 -mp0 /mnt/data/photos,mp=/data/photos/
 
 ## Radar:
 <a id="about-the-project"></a>
+
+
+
+Radarr is an open-source tool designed to automate the downloading, organizing, and tracking of movies.
+
+
+
+https://radarr.video/#home
 
 
 
@@ -400,6 +598,11 @@ pct set 108 -mp0 /mnt/data/stream/,mp=/data/stream
 
 ##  Sonarr:
 <a id="about-the-project"></a>
+
+Sonarr is an open-source application used to manage and automate the downloading, organizing, and tracking of TV series. It's popular among media enthusiasts who run home media servers
+
+https://sonarr.tv/
+
 
 mkdir /data
 mkdir /data/stream
