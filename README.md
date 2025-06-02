@@ -46,7 +46,7 @@ nomodeset
 
 
 
-# Connect to your NAS with NFS 
+# Connect to your NAS with NFS <a id="about-the-project"></a>
 
 To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
 
