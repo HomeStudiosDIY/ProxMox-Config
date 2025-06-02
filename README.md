@@ -20,7 +20,7 @@ https://community-scripts.github.io/ProxmoxVE/
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#install-nvidia-drivers-on-proxmox">Install NVIDIA Drivers on ProxMox</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -45,8 +45,8 @@ nomodeset
 
 
 
-
-# Connect to your NAS with NFS <a id="about-the-project"></a>
+<a id="about-the-project"></a>
+# Connect to your NAS with NFS
 
 To connect to a NAS device with NFS you will have to setup some paths/directory’s this is how I have done mine but you can use your own location.   
 
@@ -89,7 +89,9 @@ chown 100109:100117 /mnt/pve/disk4tb/frigate/
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-# NVIDIA Drivers Install
+
+<a id="install-nvidia-drivers-on-proxmox"></a>
+# Install NVIDIA Drivers on ProxMox
 
 
 
